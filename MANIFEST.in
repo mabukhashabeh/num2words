@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include pyproject.toml
+recursive-include examples *.py
+recursive-include tests *.py
+recursive-include num2words/data *.json
+recursive-include num2words/config *.py
+
