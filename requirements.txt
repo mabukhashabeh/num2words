@@ -1,0 +1,11 @@
+# No runtime dependencies - uses built-in JSON module!
+
+# Development dependencies (optional)
+# For testing (optional)
+# pytest>=7.0.0
+# pytest-cov>=4.0.0
+
+# For building and publishing (optional)
+# build>=0.10.0
+# twine>=4.0.0
+
