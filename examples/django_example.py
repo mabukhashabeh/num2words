@@ -1,12 +1,12 @@
 """
-Django example usage of num2words.
+Django example usage of numwordify.
 
 Add this to your Django views.py or create a separate views file.
 """
 
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from num2words import num2words
+from numwordify import num2words
 
 
 @require_http_methods(["GET"])
@@ -38,7 +38,7 @@ def number_to_words(request, number):
 # Django template filter example
 # Add to your templatetags/number_filters.py
 from django import template
-from num2words import num2words
+from numwordify import num2words
 
 register = template.Library()
 
@@ -53,4 +53,5 @@ def num2words_filter(value, lang='en'):
 # Usage in template:
 # {{ 42|num2words }}
 # {{ 42|num2words:"ar" }}
+
 

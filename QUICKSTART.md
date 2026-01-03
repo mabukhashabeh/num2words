@@ -10,7 +10,7 @@ pip install -e .
 ## Basic Usage
 
 ```python
-from num2words import num2words
+from numwordify import num2words
 
 # English
 print(num2words(42))
@@ -45,15 +45,15 @@ pip install build twine
 python -m build
 
 # This creates:
-# - dist/num2words-0.1.0.tar.gz
-# - dist/num2words-0.1.0-py3-none-any.whl
+# - dist/numwordify-0.1.0.tar.gz
+# - dist/numwordify-0.1.0-py3-none-any.whl
 ```
 
 ## Project Structure
 
 ```
-num2words/
-├── num2words/              # Main package
+numwordify/
+├── numwordify/              # Main package
 │   ├── __init__.py
 │   ├── converter.py        # Main converter interface
 │   └── languages/          # Language implementations

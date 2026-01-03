@@ -1,7 +1,7 @@
 """Tests for Arabic number conversion."""
 
 import unittest
-from num2words import num2words
+from numwordify import num2words
 
 
 class TestArabicConversion(unittest.TestCase):

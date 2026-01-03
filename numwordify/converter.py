@@ -1,5 +1,5 @@
 """
-Main converter module for num2words package.
+Main converter module for numwordify package.
 """
 
 import math

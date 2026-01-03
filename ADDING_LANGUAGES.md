@@ -1,10 +1,10 @@
 # Adding New Languages
 
-This guide explains how to add support for a new language to num2words.
+This guide explains how to add support for a new language to numwordify.
 
 ## Overview
 
-The num2words package uses JSON configuration files (built-in, no dependencies) to store language translations. This makes it easy to:
+The numwordify package uses JSON configuration files (built-in, no dependencies) to store language translations. This makes it easy to:
 - Add new languages
 - Update existing translations
 - Maintain consistency across languages
@@ -13,7 +13,7 @@ The num2words package uses JSON configuration files (built-in, no dependencies) 
 
 ### 1. Create JSON Configuration File
 
-Create a new JSON file in `num2words/data/` directory. For example, `french.json`:
+Create a new JSON file in `numwordify/data/` directory. For example, `french.json`:
 
 ```json
 {
@@ -76,7 +76,7 @@ Create a new JSON file in `num2words/data/` directory. For example, `french.json
 
 ### 2. Create Language Converter Class
 
-Create a new converter class in `num2words/languages/french.py`:
+Create a new converter class in `numwordify/languages/french.py`:
 
 ```python
 """
@@ -124,7 +124,7 @@ class FrenchConverter(BaseConverter):
 
 ### 3. Register Language in Settings
 
-Update `num2words/config/settings.py`:
+Update `numwordify/config/settings.py`:
 
 ```python
 SUPPORTED_LANGUAGES = {
@@ -152,7 +152,7 @@ language_map: Dict[str, Path] = {
 
 ### 4. Register Converter
 
-Update `num2words/converter.py`:
+Update `numwordify/converter.py`:
 
 ```python
 from .languages.french import FrenchConverter
@@ -198,7 +198,7 @@ Create test file `tests/test_french.py`:
 """Tests for French number conversion."""
 
 import unittest
-from num2words import num2words
+from numwordify import num2words
 
 
 class TestFrenchConversion(unittest.TestCase):
@@ -255,7 +255,7 @@ Some languages may need additional fields:
 
 ## Example: Complete French JSON
 
-See `num2words/data/english.json` for a complete example structure that you can adapt for your language.
+See `numwordify/data/english.json` for a complete example structure that you can adapt for your language.
 
 ## Questions?
 

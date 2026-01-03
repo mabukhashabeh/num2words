@@ -1,7 +1,7 @@
 """Tests for English number conversion."""
 
 import unittest
-from num2words import num2words
+from numwordify import num2words
 
 
 class TestEnglishConversion(unittest.TestCase):
@@ -68,4 +68,5 @@ class TestEnglishConversion(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 

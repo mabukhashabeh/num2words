@@ -1,5 +1,5 @@
 """
-num2words - A lightweight, performant number-to-words converter
+numwordify - A lightweight, performant number-to-words converter
 Supporting English and Arabic languages.
 """
 

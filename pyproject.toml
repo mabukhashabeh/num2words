@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "num2words"
+name = "numwordify"
 version = "0.1.0"
 description = "A lightweight, performant number-to-words converter supporting English and Arabic"
 readme = "README.md"
@@ -12,7 +12,7 @@ license = {text = "MIT"}
 authors = [
     {name = "Mohammad Abu Khahsabeh", email = "abukhashabehmohammad@gmail.com"}
 ]
-keywords = ["number", "words", "converter", "english", "arabic", "num2words", "text"]
+keywords = ["number", "words", "converter", "english", "arabic", "numwordify", "text"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -28,14 +28,14 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/mabukhashabeh/num2words"
-Documentation = "https://github.com/mabukhashabeh/num2words#readme"
-Repository = "https://github.com/mabukhashabeh/num2words"
-Issues = "https://github.com/mabukhashabeh/num2words/issues"
+Homepage = "https://github.com/mabukhashabeh/numwordify"
+Documentation = "https://github.com/mabukhashabeh/numwordify#readme"
+Repository = "https://github.com/mabukhashabeh/numwordify"
+Issues = "https://github.com/mabukhashabeh/numwordify/issues"
 
 [tool.setuptools]
-packages = ["num2words"]
+packages = ["numwordify"]
 
 [tool.setuptools.package-data]
-"num2words" = ["data/*.json", "*.txt", "*.md"]
+"numwordify" = ["data/*.json", "*.txt", "*.md"]
 

@@ -1,10 +1,10 @@
 """
-FastAPI example usage of num2words.
+FastAPI example usage of numwordify.
 """
 
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
-from num2words import num2words
+from numwordify import num2words
 
 app = FastAPI(title="Number to Words API", version="1.0.0")
 
@@ -58,4 +58,5 @@ async def root():
 
 
 # Run with: uvicorn fastapi_example:app --reload
+
 

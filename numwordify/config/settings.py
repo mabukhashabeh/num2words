@@ -1,14 +1,14 @@
-"""Settings and configuration for num2words package."""
+"""Settings and configuration for numwordify package."""
 
 from typing import Dict, Any
 from pathlib import Path
 
 
 class Settings:
-    """Centralized settings for num2words package."""
+    """Centralized settings for numwordify package."""
     
     # Package metadata
-    PACKAGE_NAME = "num2words"
+    PACKAGE_NAME = "numwordify"
     VERSION = "0.1.0"
     
     # Default configuration

@@ -2,7 +2,7 @@
 
 import unittest
 import math
-from num2words import num2words
+from numwordify import num2words
 
 
 class TestEdgeCases(unittest.TestCase):

@@ -1,6 +1,6 @@
 # Publishing to PyPI
 
-This guide explains how to publish the `num2words` package to PyPI.
+This guide explains how to publish the `numwordify` package to PyPI.
 
 ## Prerequisites
 
@@ -20,18 +20,18 @@ pip install build twine
 Update the version in:
 - `pyproject.toml` (version field)
 - `setup.py` (version field)
-- `num2words/__init__.py` (__version__)
+- `numwordify/__init__.py` (__version__)
 
 ### 2. Build the Package
 
 ```bash
-cd num2words
+cd numwordify
 python -m build
 ```
 
 This creates:
-- `dist/num2words-0.1.0.tar.gz` (source distribution)
-- `dist/num2words-0.1.0-py3-none-any.whl` (wheel)
+- `dist/numwordify-0.1.0.tar.gz` (source distribution)
+- `dist/numwordify-0.1.0-py3-none-any.whl` (wheel)
 
 ### 3. Test on TestPyPI (Recommended)
 
@@ -40,7 +40,7 @@ This creates:
 twine upload --repository testpypi dist/*
 
 # Test installation
-pip install --index-url https://test.pypi.org/simple/ num2words
+pip install --index-url https://test.pypi.org/simple/ numwordify
 ```
 
 ### 4. Publish to PyPI
@@ -53,8 +53,8 @@ twine upload dist/*
 ### 5. Verify Installation
 
 ```bash
-pip install num2words
-python -c "from num2words import num2words; print(num2words(42))"
+pip install numwordify
+python -c "from numwordify import num2words; print(num2words(42))"
 ```
 
 ## Updating the Package

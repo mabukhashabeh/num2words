@@ -1,5 +1,5 @@
 """
-Setup script for num2words package.
+Setup script for numwordify package.
 """
 
 from setuptools import setup, find_packages
@@ -8,17 +8,17 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="num2words",
+    name="numwordify",
     version="0.1.0",
     author="Mohammad Abu Khahsabeh",
     author_email="abukhashabehmohammad@gmail.com",
     description="A lightweight, performant number-to-words converter supporting English and Arabic",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/mabukhashabeh/num2words",
+    url="https://github.com/mabukhashabeh/numwordify",
     packages=find_packages(),
     package_data={
-        'num2words': ['data/*.json'],
+        'numwordify': ['data/*.json'],
     },
     include_package_data=True,
     classifiers=[
@@ -35,7 +35,7 @@ setup(
         "Topic :: Text Processing :: Linguistic",
     ],
     python_requires=">=3.8",
-    keywords="number words converter english arabic num2words text",
+    keywords="number words converter english arabic numwordify text",
     zip_safe=True,
 )
 

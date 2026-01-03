@@ -29,11 +29,11 @@ test-verbose:
 	python -m unittest discover -s tests -p "test_*.py" -v -b
 
 lint:
-	flake8 num2words/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics
-	flake8 num2words/ tests/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+	flake8 numwordify/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics
+	flake8 numwordify/ tests/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
 type-check:
-	mypy num2words/ --ignore-missing-imports
+	mypy numwordify/ --ignore-missing-imports
 
 clean:
 	rm -rf build/
@@ -58,5 +58,6 @@ upload: dist
 
 docs:
 	@echo "Documentation is in README.md"
-	@echo "For API docs, see README.md or run: python -c 'import num2words; help(num2words)'"
+	@echo "For API docs, see README.md or run: python -c 'import numwordify; help(numwordify)'"
+
 

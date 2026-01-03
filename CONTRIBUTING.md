@@ -1,6 +1,6 @@
-# Contributing to num2words
+# Contributing to numwordify
 
-Thank you for your interest in contributing to num2words! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to numwordify! This document provides guidelines and instructions for contributing.
 
 ## Getting Started
 
@@ -16,8 +16,8 @@ Thank you for your interest in contributing to num2words! This document provides
 
 ```bash
 # Clone the repository
-git clone https://github.com/mabukhashabeh/num2words.git
-cd num2words
+git clone https://github.com/mabukhashabeh/numwordify.git
+cd numwordify
 
 # Install in development mode
 make install-dev
@@ -61,7 +61,7 @@ make test
 
 To add support for a new language:
 
-1. Create a new converter class in `num2words/languages/`
+1. Create a new converter class in `numwordify/languages/`
 2. Inherit from `BaseConverter`
 3. Implement the `convert` method
 4. Add language codes to `NumberConverter._converters`
@@ -80,4 +80,5 @@ When reporting issues, please include:
 ## License
 
 By contributing, you agree that your contributions will be licensed under the MIT License.
+
 

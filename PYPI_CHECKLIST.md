@@ -66,7 +66,7 @@ This checklist ensures the package meets all PyPI requirements for professional 
 1. **Update Version**
    - Update version in pyproject.toml
    - Update version in setup.py
-   - Update __version__ in num2words/__init__.py
+   - Update __version__ in numwordify/__init__.py
    - Update CHANGELOG.md
 
 2. **Run Tests**
@@ -102,8 +102,8 @@ This checklist ensures the package meets all PyPI requirements for professional 
 
 7. **Install from TestPyPI and Test**
    ```bash
-   pip install --index-url https://test.pypi.org/simple/ num2words
-   python -c "from num2words import num2words; print(num2words(42))"
+   pip install --index-url https://test.pypi.org/simple/ numwordify
+   python -c "from numwordify import num2words; print(num2words(42))"
    ```
 
 8. **Publish to PyPI**
@@ -115,8 +115,8 @@ This checklist ensures the package meets all PyPI requirements for professional 
 
 9. **Verify Installation**
    ```bash
-   pip install num2words
-   python -c "from num2words import num2words; print(num2words(42))"
+   pip install numwordify
+   python -c "from numwordify import num2words; print(num2words(42))"
    ```
 
 ## Post-Publishing
@@ -131,4 +131,5 @@ This checklist ensures the package meets all PyPI requirements for professional 
 - Always test on TestPyPI first
 - Keep API tokens secure (use environment variables or .pypirc)
 - Follow semantic versioning (MAJOR.MINOR.PATCH)
+
 

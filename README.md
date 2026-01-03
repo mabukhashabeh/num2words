@@ -1,4 +1,4 @@
-# num2words
+# numwordify
 
 A lightweight, performant Python package for converting numbers to words in English and Arabic. Designed to work seamlessly with Django, FastAPI, Flask, and other Python frameworks.
 
@@ -16,7 +16,7 @@ A lightweight, performant Python package for converting numbers to words in Engl
 ## Installation
 
 ```bash
-pip install num2words
+pip install numwordify
 ```
 
 ## Quick Start
@@ -24,7 +24,7 @@ pip install num2words
 ### Basic Usage
 
 ```python
-from num2words import num2words
+from numwordify import num2words
 
 # English
 print(num2words(42))

@@ -1,7 +1,7 @@
 """Integration tests for num2words package."""
 
 import unittest
-from num2words import num2words, convert
+from numwordify import num2words, convert
 
 
 class TestIntegration(unittest.TestCase):
@@ -36,4 +36,5 @@ class TestIntegration(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 
