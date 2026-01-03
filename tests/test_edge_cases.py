@@ -115,7 +115,7 @@ class TestEdgeCases(unittest.TestCase):
         
         # Feminine
         self.assertEqual(num2words(1, lang='ar', gender='f'), "واحدة")
-        self.assertEqual(num2words(2, lang='ar', gender='f'), "اثنتان")
+        self.assertEqual(num2words(2, lang='ar', gender='f'), "إثنتان")
         
         # Test with larger numbers
         self.assertEqual(num2words(100, lang='ar', gender='m'), "مائة")
