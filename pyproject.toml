@@ -7,7 +7,7 @@ name = "num2words"
 version = "0.1.0"
 description = "A lightweight, performant number-to-words converter supporting English and Arabic"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
     {name = "Mohammad Abu Khahsabeh", email = "abukhashabehmohammad@gmail.com"}
