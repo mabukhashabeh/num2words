@@ -88,18 +88,18 @@ print(num2words(100.50, to='currency', currency='EUR'))
 
 # Arabic
 print(num2words(323424.2, to='currency', currency='SAR', lang='ar'))
-# Output: "ثلاثة مائة و ثلاثة و عشرون ألف و أربعة مائة و أربعة و عشرون ريالات و عشرون هللة"
+# Output: "ثلاثة مائة و ثلاثة و عشرون ألف و أربعة مائة و أربعة و عشرون ريالاً و عشرون هللة"
 
 print(num2words(50.25, to='currency', currency='SAR', lang='ar'))
-# Output: "خمسون ريالات و خمسة و عشرون هللة"
+# Output: "خمسون ريالاً و خمسة و عشرون هللة"
 
 print(num2words(123.45, to='currency', currency='JOD', lang='ar'))
-# Output: "مائة و ثلاثة و عشرون دنانير و خمسة و أربعون قرشاً"
+# Output: "مائة و ثلاثة و عشرون ديناراً و خمسة و أربعون قرشاً"
 
 print(num2words(50.25, to='currency', currency='EGP', lang='ar'))
-# Output: "خمسون جنيهات و خمسة و عشرون قرشاً"
+# Output: "خمسون جنيهاً و خمسة و عشرون قرشاً"
 
-# Supported currencies: SAR, USD, EUR, EGP, KWD, JOD
+# Supported currencies: SAR, USD, EUR, EGP, KWD, JOD, BHD, IQD, AED, OMR, QAR, LBP, SYP, TND, DZD, MAD, LYD
 ```
 
 ## Usage with Web Frameworks
@@ -155,7 +155,7 @@ Convert a number to words.
 - `lang` (str): Language code. Options: `'en'`, `'ar'`, `'english'`, `'arabic'`. Default: `'en'`
 - `to` (str): Conversion type. Options: `'cardinal'`, `'ordinal'`, `'currency'`. Default: `'cardinal'`
 - `**kwargs`: Additional language-specific parameters:
-  - `currency` (str): Currency code for currency conversion. Options: `'SAR'`, `'USD'`, `'EUR'`, `'EGP'`, `'KWD'`, `'JOD'`. Default: `'USD'` for English, `'SAR'` for Arabic
+  - `currency` (str): Currency code for currency conversion. Options: `'SAR'`, `'USD'`, `'EUR'`, `'EGP'`, `'KWD'`, `'JOD'`, `'BHD'`, `'IQD'`, `'AED'`, `'OMR'`, `'QAR'`, `'LBP'`, `'SYP'`, `'TND'`, `'DZD'`, `'MAD'`, `'LYD'`. Default: `'USD'` for English, `'SAR'` for Arabic
   - `gender` (str): For Arabic, use `'m'` (masculine) or `'f'` (feminine). Default: `'m'`
 
 **Returns:**
@@ -178,8 +178,19 @@ Convert a number to words.
 - **EGP** (Egyptian Pound): 100 piastres per pound
 - **KWD** (Kuwaiti Dinar): 1000 fils per dinar
 - **JOD** (Jordanian Dinar): 100 piastres per dinar
+- **BHD** (Bahraini Dinar): 1000 fils per dinar
+- **IQD** (Iraqi Dinar): 1000 fils per dinar
+- **AED** (UAE Dirham): 100 fils per dirham
+- **OMR** (Omani Rial): 1000 baisa per rial
+- **QAR** (Qatari Riyal): 100 dirhams per riyal
+- **LBP** (Lebanese Pound): 100 piastres per pound
+- **SYP** (Syrian Pound): 100 piastres per pound
+- **TND** (Tunisian Dinar): 1000 millimes per dinar
+- **DZD** (Algerian Dinar): 100 centimes per dinar
+- **MAD** (Moroccan Dirham): 100 centimes per dirham
+- **LYD** (Libyan Dinar): 1000 dirhams per dinar
 
-All currencies are configurable via JSON files and can be easily extended.
+All currencies are configurable via JSON files and can be easily extended. Arabic currency formatting follows proper grammatical rules with tanween (accusative case) for numbers 11 and above.
 
 ## Performance
 

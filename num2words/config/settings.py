@@ -39,6 +39,17 @@ class Settings:
         'EGP': 'Egyptian Pound',
         'KWD': 'Kuwaiti Dinar',
         'JOD': 'Jordanian Dinar',
+        'BHD': 'Bahraini Dinar',
+        'IQD': 'Iraqi Dinar',
+        'AED': 'UAE Dirham',
+        'OMR': 'Omani Rial',
+        'QAR': 'Qatari Riyal',
+        'LBP': 'Lebanese Pound',
+        'SYP': 'Syrian Pound',
+        'TND': 'Tunisian Dinar',
+        'DZD': 'Algerian Dinar',
+        'MAD': 'Moroccan Dirham',
+        'LYD': 'Libyan Dinar',
     }
     
     # Gender options (for Arabic)

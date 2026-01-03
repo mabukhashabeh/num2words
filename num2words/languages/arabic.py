@@ -206,16 +206,22 @@ class ArabicConverter(BaseConverter):
             else:
                 main_words = self._to_cardinal(main_units, gender)
             
+            use_tanween_main = currency_info.get('use_tanween_for_main', True)
+            
             if main_units == 1:
-                currency_name = currency_info['name']
+                if use_tanween_main:
+                    currency_name = currency_info.get('name_with_tanween', currency_info['name'])
+                else:
+                    currency_name = currency_info['name']
             elif main_units == 2:
                 currency_name = currency_info.get('dual', currency_info.get('plural', currency_info['name']))
             elif main_units >= 3 and main_units <= 10:
                 currency_name = currency_info.get('plural', currency_info['name'])
-            elif main_units % 100 == 0 or main_units % 1000 == 0:
-                currency_name = currency_info['name']
             else:
-                currency_name = currency_info.get('plural', currency_info['name'])
+                if use_tanween_main:
+                    currency_name = currency_info.get('name_with_tanween', currency_info['name'])
+                else:
+                    currency_name = currency_info.get('plural_with_tanween', currency_info.get('plural', currency_info['name']))
             
             if main_units == 1:
                 parts.append(f"{currency_name} {main_words}")
