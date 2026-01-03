@@ -97,8 +97,13 @@ class NumberConverter:
         
         # Validate currency if currency conversion
         if to == 'currency':
-            currency = kwargs.get('currency', 'USD')
-            currency = Settings.validate_currency(currency)
+            currency = kwargs.get('currency', 'USD' if lang_key == 'english' else 'SAR')
+            converter = cls._converters[lang_key]
+            if hasattr(converter, 'currencies') and currency not in converter.currencies:
+                raise ValueError(
+                    f"Unsupported currency: {currency}. "
+                    f"Supported: {list(converter.currencies.keys())}"
+                )
             kwargs['currency'] = currency
         
         converter = cls._converters[lang_key]
