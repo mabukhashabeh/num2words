@@ -104,7 +104,6 @@ class ArabicConverter(BaseConverter):
             if ones_digit == 0:
                 return tens[tens_digit]
             
-            # Arabic uses "ones and tens" format
             return f"{ones[ones_digit]} {self.conjunction} {tens[tens_digit]}"
         
         if number < 1000:
@@ -116,7 +115,6 @@ class ArabicConverter(BaseConverter):
             
             return f"{self.hundreds[hundreds_digit]} {self.conjunction} {self._to_cardinal(remainder, gender)}"
         
-        # Handle larger numbers
         scale_index = 0
         result_parts = []
         
@@ -126,7 +124,6 @@ class ArabicConverter(BaseConverter):
             
             if chunk > 0:
                 if scale_index > 0:
-                    # For scales, handle special cases
                     if chunk == 1:
                         chunk_words = self._get_scale_word(chunk, scale_index)
                     elif chunk == 2:
@@ -134,7 +131,7 @@ class ArabicConverter(BaseConverter):
                     else:
                         chunk_words = self._to_cardinal(chunk, gender)
                         scale_word = self._get_scale_word(chunk, scale_index)
-                        chunk_words += f"{self.scale_separator}{scale_word}"
+                        chunk_words += f" {scale_word}"
                 else:
                     chunk_words = self._to_cardinal(chunk, gender)
                 
@@ -163,31 +160,24 @@ class ArabicConverter(BaseConverter):
                 return self.scales_plural[scale_index]
             return self.scales[scale_index]
         else:
-            # For numbers > 10, check the last two digits
-            # In Arabic, numbers ending in 11-99 use singular scale word
             last_two_digits = number % 100
             if 11 <= last_two_digits <= 99:
-                # Ends in 11-99: use singular (ثلاثة وعشرون ألف)
                 return self.scales[scale_index]
             elif last_two_digits == 0:
-                # Round hundreds/thousands: use plural (ثلاث مائة آلاف)
                 if scale_index < len(self.scales_plural):
                     return self.scales_plural[scale_index]
                 return self.scales[scale_index]
             elif last_two_digits <= 10:
-                # Ends in 1-10: use plural (ثلاث مائة وثلاثة آلاف)
                 if scale_index < len(self.scales_plural):
                     return self.scales_plural[scale_index]
                 return self.scales[scale_index]
             else:
-                # Should not reach here, but default to plural
                 if scale_index < len(self.scales_plural):
                     return self.scales_plural[scale_index]
                 return self.scales[scale_index]
     
     def _to_ordinal(self, number: int, gender: str = 'm') -> str:
         """Convert integer to ordinal Arabic words."""
-        # Arabic ordinals are complex, using simplified approach
         cardinal = self._to_cardinal(number, gender)
         return f"{self.ordinal_prefix}{cardinal}"
     
@@ -204,42 +194,29 @@ class ArabicConverter(BaseConverter):
         
         is_negative, number = self._handle_negative(number)
         
-        # Convert to smallest unit (e.g., halalas, fils)
         total_subunits = int(round(number * subunit_factor))
-        
-        # Get main unit and subunit
         main_units = total_subunits // subunit_factor
         subunits = total_subunits % subunit_factor
         
-        # Build result
         parts = []
         
-        # Always show main units (even if zero when there are subunits)
         if main_units > 0 or (main_units == 0 and subunits > 0):
             if main_units == 0:
                 main_words = self.zero
             else:
                 main_words = self._to_cardinal(main_units, gender)
             
-            # Arabic grammar: numbers 3-10 use plural, but 100, 1000, etc. use singular
-            # Also, 1 always uses singular, 2 uses dual if available
             if main_units == 1:
                 currency_name = currency_info['name']
             elif main_units == 2:
-                # Use dual form if available, otherwise plural
                 currency_name = currency_info.get('dual', currency_info.get('plural', currency_info['name']))
             elif main_units >= 3 and main_units <= 10:
-                # Numbers 3-10 use plural
                 currency_name = currency_info.get('plural', currency_info['name'])
             elif main_units % 100 == 0 or main_units % 1000 == 0:
-                # Round hundreds and thousands use singular (مئة ريال، ألف ريال)
                 currency_name = currency_info['name']
             else:
-                # Other numbers use plural
                 currency_name = currency_info.get('plural', currency_info['name'])
             
-            # Arabic currency convention: for "one", put currency name first (ريال واحد)
-            # For other numbers, put number first (خمسة ريالات، مئة ريال)
             if main_units == 1:
                 parts.append(f"{currency_name} {main_words}")
             else:
@@ -247,33 +224,23 @@ class ArabicConverter(BaseConverter):
         
         if subunits > 0:
             subunit_words = self._to_cardinal(subunits, gender)
-            # Use proper Arabic currency formatting based on real-world conventions
-            # SAR: خمسون هللة (singular form even with plural numbers)
-            # KWD/EGP/USD: عشرون فلساً، خمسة وعشرون قرشاً (tanween for all numbers)
             use_tanween = currency_info.get('use_tanween_for_subunit', False)
             subunit_always_singular = currency_info.get('subunit_always_singular', False)
             
             if subunits == 1:
-                # Singular form
                 if use_tanween:
                     subunit_name = currency_info.get('subunit_with_tanween', currency_info['subunit'])
                 else:
                     subunit_name = currency_info['subunit']
             elif subunit_always_singular:
-                # Some currencies (like SAR) use singular form even with plural numbers
-                # خمسون هللة (not هللات), عشرون هللة (not هللات)
                 subunit_name = currency_info.get('subunit_with_tanween', currency_info['subunit'])
             elif use_tanween:
-                # For currencies that use tanween, apply it to all numbers (not just round tens)
-                # خمسة وعشرون قرشاً، خمسة وسبعون قرشاً
                 subunit_name = currency_info.get('subunit_with_tanween', currency_info['subunit'])
             else:
-                # Other numbers use plural form
                 subunit_name = currency_info.get('subunit_plural', currency_info['subunit'])
             parts.append(f"{subunit_words} {subunit_name}")
         
         if not parts:
-            # Completely zero amount
             parts.append(f"{self.zero} {currency_info['name']}")
         
         result = f' {self.conjunction} '.join(parts)
