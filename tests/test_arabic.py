@@ -14,8 +14,8 @@ class TestArabicConversion(unittest.TestCase):
         self.assertEqual(num2words(10, lang='ar'), "عشرة")
         self.assertEqual(num2words(15, lang='ar'), "خمسة عشر")
         self.assertEqual(num2words(20, lang='ar'), "عشرون")
-        self.assertEqual(num2words(21, lang='ar'), "واحد وعشرون")
-        self.assertEqual(num2words(99, lang='ar'), "تسعة وتسعون")
+        self.assertEqual(num2words(21, lang='ar'), "واحد و عشرون")
+        self.assertEqual(num2words(99, lang='ar'), "تسعة و تسعون")
     
     def test_hundreds(self):
         """Test hundreds."""
@@ -38,7 +38,7 @@ class TestArabicConversion(unittest.TestCase):
         
         # Feminine
         self.assertEqual(num2words(1, lang='ar', gender='f'), "واحدة")
-        self.assertEqual(num2words(2, lang='ar', gender='f'), "اثنتان")
+        self.assertEqual(num2words(2, lang='ar', gender='f'), "إثنتان")
     
     def test_negative_numbers(self):
         """Test negative numbers."""
