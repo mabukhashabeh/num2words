@@ -28,6 +28,16 @@ class Settings:
     CONVERSION_TYPES = {
         'cardinal': 'cardinal',
         'ordinal': 'ordinal',
+        'currency': 'currency',
+    }
+    
+    # Supported currencies
+    SUPPORTED_CURRENCIES = {
+        'SAR': 'Saudi Riyal',
+        'USD': 'US Dollar',
+        'EUR': 'Euro',
+        'EGP': 'Egyptian Pound',
+        'KWD': 'Kuwaiti Dinar',
     }
     
     # Gender options (for Arabic)
@@ -97,6 +107,17 @@ class Settings:
         raise ValueError(
             f"Invalid conversion type: {conversion_type}. "
             f"Must be one of: {list(cls.CONVERSION_TYPES.keys())}"
+        )
+    
+    @classmethod
+    def validate_currency(cls, currency: str) -> str:
+        """Validate currency code."""
+        currency_upper = currency.upper()
+        if currency_upper in cls.SUPPORTED_CURRENCIES:
+            return currency_upper
+        raise ValueError(
+            f"Unsupported currency: {currency}. "
+            f"Supported: {list(cls.SUPPORTED_CURRENCIES.keys())}"
         )
     
     @classmethod

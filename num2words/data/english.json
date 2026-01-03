@@ -103,5 +103,42 @@
   "negative_prefix": "negative",
   "decimal_separator": "point",
   "number_separator": "-",
-  "scale_separator": " "
+  "scale_separator": " ",
+  "currencies": {
+    "SAR": {
+      "name": "riyal",
+      "plural": "riyals",
+      "subunit": "halala",
+      "subunit_plural": "halalas",
+      "subunit_factor": 100
+    },
+    "USD": {
+      "name": "dollar",
+      "plural": "dollars",
+      "subunit": "cent",
+      "subunit_plural": "cents",
+      "subunit_factor": 100
+    },
+    "EUR": {
+      "name": "euro",
+      "plural": "euros",
+      "subunit": "cent",
+      "subunit_plural": "cents",
+      "subunit_factor": 100
+    },
+    "EGP": {
+      "name": "pound",
+      "plural": "pounds",
+      "subunit": "piastre",
+      "subunit_plural": "piastres",
+      "subunit_factor": 100
+    },
+    "KWD": {
+      "name": "dinar",
+      "plural": "dinars",
+      "subunit": "fils",
+      "subunit_plural": "fils",
+      "subunit_factor": 1000
+    }
+  }
 }

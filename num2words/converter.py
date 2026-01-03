@@ -95,6 +95,12 @@ class NumberConverter:
         # Validate conversion type
         to = Settings.validate_conversion_type(to)
         
+        # Validate currency if currency conversion
+        if to == 'currency':
+            currency = kwargs.get('currency', 'USD')
+            currency = Settings.validate_currency(currency)
+            kwargs['currency'] = currency
+        
         converter = cls._converters[lang_key]
         return converter.convert(number, to=to, **kwargs)
 
@@ -107,8 +113,10 @@ def num2words(number: Union[int, float], lang: str = 'en',
     Args:
         number: Integer or float to convert
         lang: Language code ('en', 'ar', 'english', 'arabic')
-        to: Conversion type ('cardinal', 'ordinal')
-        **kwargs: Additional language-specific parameters (e.g., gender='f' for Arabic)
+        to: Conversion type ('cardinal', 'ordinal', 'currency')
+        **kwargs: Additional language-specific parameters:
+            - currency: Currency code for currency conversion ('SAR', 'USD', 'EUR', 'EGP', 'KWD')
+            - gender: For Arabic, use 'm' (masculine) or 'f' (feminine)
     
     Returns:
         str: Number in words
@@ -120,6 +128,10 @@ def num2words(number: Union[int, float], lang: str = 'en',
         'اثنان وأربعون'
         >>> num2words(42, lang='ar', gender='f')
         'اثنتان وأربعون'
+        >>> num2words(123.45, to='currency', currency='USD')
+        'one hundred twenty-three dollars and forty-five cents'
+        >>> num2words(323424.2, to='currency', currency='SAR', lang='ar')
+        'ثلاث مئة وثلاثة وعشرون آلاف وأربع مئة وأربعة وعشرون ريالات وعشرون هللات'
     
     Raises:
         ValueError: If language is not supported or number is invalid

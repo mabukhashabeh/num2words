@@ -36,6 +36,7 @@ class ArabicConverter(BaseConverter):
         self.conjunction: str = config.get('conjunction', 'و')
         self.number_separator: str = config.get('number_separator', ' ')
         self.scale_separator: str = config.get('scale_separator', ' ')
+        self.currencies: dict = config.get('currencies', {})
     
     def convert(self, number: Union[int, float], to: str = 'cardinal', 
                 gender: str = 'm', **kwargs) -> str:
@@ -44,8 +45,10 @@ class ArabicConverter(BaseConverter):
         
         Args:
             number: Integer or float
-            to: 'cardinal' or 'ordinal'
+            to: 'cardinal', 'ordinal', or 'currency'
             gender: 'm' (masculine) or 'f' (feminine)
+            **kwargs: Additional parameters
+                - currency: Currency code (e.g., 'SAR', 'USD', 'EUR')
         
         Returns:
             str: Number in Arabic words
@@ -53,6 +56,11 @@ class ArabicConverter(BaseConverter):
         # Validate parameters
         to = self._settings.validate_conversion_type(to)
         gender = self._settings.validate_gender(gender)
+        
+        # Handle currency conversion
+        if to == 'currency':
+            currency = kwargs.get('currency', 'SAR')
+            return self._to_currency(number, currency, gender)
         
         is_negative, number = self._handle_negative(number)
         integer_part, decimal_value, decimal_str = self._handle_decimal(number)
@@ -164,3 +172,58 @@ class ArabicConverter(BaseConverter):
         # Arabic ordinals are complex, using simplified approach
         cardinal = self._to_cardinal(number, gender)
         return f"{self.ordinal_prefix}{cardinal}"
+    
+    def _to_currency(self, number: Union[int, float], currency: str, gender: str = 'm') -> str:
+        """Convert number to currency words in Arabic."""
+        if currency not in self.currencies:
+            raise ValueError(
+                f"Unsupported currency: {currency}. "
+                f"Supported: {list(self.currencies.keys())}"
+            )
+        
+        currency_info = self.currencies[currency]
+        subunit_factor = currency_info.get('subunit_factor', 100)
+        
+        is_negative, number = self._handle_negative(number)
+        
+        # Convert to smallest unit (e.g., halalas, fils)
+        total_subunits = int(round(number * subunit_factor))
+        
+        # Get main unit and subunit
+        main_units = total_subunits // subunit_factor
+        subunits = total_subunits % subunit_factor
+        
+        # Build result
+        parts = []
+        
+        # Always show main units (even if zero when there are subunits)
+        if main_units > 0 or (main_units == 0 and subunits > 0):
+            if main_units == 0:
+                main_words = self.zero
+            else:
+                main_words = self._to_cardinal(main_units, gender)
+            
+            if main_units == 1:
+                currency_name = currency_info['name']
+            else:
+                currency_name = currency_info.get('plural', currency_info['name'])
+            parts.append(f"{main_words} {currency_name}")
+        
+        if subunits > 0:
+            subunit_words = self._to_cardinal(subunits, gender)
+            if subunits == 1:
+                subunit_name = currency_info['subunit']
+            else:
+                subunit_name = currency_info.get('subunit_plural', currency_info['subunit'])
+            parts.append(f"{subunit_words} {subunit_name}")
+        
+        if not parts:
+            # Completely zero amount
+            parts.append(f"{self.zero} {currency_info['name']}")
+        
+        result = f' {self.conjunction}'.join(parts)
+        
+        if is_negative:
+            result = f"{self.negative_prefix} {result}"
+        
+        return result

@@ -1,6 +1,6 @@
 """
 English number-to-words converter.
-Uses YAML configuration for translations.
+Uses JSON configuration for translations.
 """
 
 from typing import Union, List
@@ -10,7 +10,7 @@ from ..config.settings import Settings
 
 
 class EnglishConverter(BaseConverter):
-    """English language converter using YAML configuration."""
+    """English language converter using JSON configuration."""
     
     def __init__(self):
         """Initialize English converter with configuration."""
@@ -34,6 +34,7 @@ class EnglishConverter(BaseConverter):
         self.decimal_separator: str = config.get('decimal_separator', 'point')
         self.number_separator: str = config.get('number_separator', '-')
         self.scale_separator: str = config.get('scale_separator', ' ')
+        self.currencies: dict = config.get('currencies', {})
     
     def convert(self, number: Union[int, float], to: str = 'cardinal', **kwargs) -> str:
         """
@@ -41,13 +42,20 @@ class EnglishConverter(BaseConverter):
         
         Args:
             number: Integer or float
-            to: 'cardinal' or 'ordinal'
+            to: 'cardinal', 'ordinal', or 'currency'
+            **kwargs: Additional parameters
+                - currency: Currency code (e.g., 'SAR', 'USD', 'EUR')
         
         Returns:
             str: Number in English words
         """
         # Validate conversion type
         to = self._settings.validate_conversion_type(to)
+        
+        # Handle currency conversion
+        if to == 'currency':
+            currency = kwargs.get('currency', 'USD')
+            return self._to_currency(number, currency)
         
         is_negative, number = self._handle_negative(number)
         integer_part, decimal_value, decimal_str = self._handle_decimal(number)
@@ -185,3 +193,58 @@ class EnglishConverter(BaseConverter):
             scale_index += 1
         
         return ' '.join(result_parts)
+    
+    def _to_currency(self, number: Union[int, float], currency: str) -> str:
+        """Convert number to currency words."""
+        if currency not in self.currencies:
+            raise ValueError(
+                f"Unsupported currency: {currency}. "
+                f"Supported: {list(self.currencies.keys())}"
+            )
+        
+        currency_info = self.currencies[currency]
+        subunit_factor = currency_info.get('subunit_factor', 100)
+        
+        is_negative, number = self._handle_negative(number)
+        
+        # Convert to smallest unit (e.g., cents, halalas)
+        total_subunits = int(round(number * subunit_factor))
+        
+        # Get main unit and subunit
+        main_units = total_subunits // subunit_factor
+        subunits = total_subunits % subunit_factor
+        
+        # Build result
+        parts = []
+        
+        # Always show main units (even if zero when there are subunits)
+        if main_units > 0 or (main_units == 0 and subunits > 0):
+            if main_units == 0:
+                main_words = self.zero
+            else:
+                main_words = self._to_cardinal(main_units)
+            
+            if main_units == 1:
+                currency_name = currency_info['name']
+            else:
+                currency_name = currency_info.get('plural', currency_info['name'])
+            parts.append(f"{main_words} {currency_name}")
+        
+        if subunits > 0:
+            subunit_words = self._to_cardinal(subunits)
+            if subunits == 1:
+                subunit_name = currency_info['subunit']
+            else:
+                subunit_name = currency_info.get('subunit_plural', currency_info['subunit'])
+            parts.append(f"{subunit_words} {subunit_name}")
+        
+        if not parts:
+            # Completely zero amount
+            parts.append(f"{self.zero} {currency_info['name']}")
+        
+        result = ' and '.join(parts)
+        
+        if is_negative:
+            result = f"{self.negative_prefix} {result}"
+        
+        return result

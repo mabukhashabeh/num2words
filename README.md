@@ -76,6 +76,26 @@ print(num2words(-42, lang='ar'))
 # Output: "سالب اثنان وأربعون"
 ```
 
+### Currency Conversion
+
+```python
+# English
+print(num2words(123.45, to='currency', currency='USD'))
+# Output: "one hundred twenty-three dollars and forty-five cents"
+
+print(num2words(100.50, to='currency', currency='EUR'))
+# Output: "one hundred euros and fifty cents"
+
+# Arabic
+print(num2words(323424.2, to='currency', currency='SAR', lang='ar'))
+# Output: "ثلاث مئة وثلاثة وعشرون آلاف وأربع مئة وأربعة وعشرون ريالات وعشرون هللات"
+
+print(num2words(50.25, to='currency', currency='EGP', lang='ar'))
+# Output: "خمسون جنيهات وخمسة وعشرون قروش"
+
+# Supported currencies: SAR, USD, EUR, EGP, KWD
+```
+
 ## Usage with Web Frameworks
 
 ### Django
@@ -127,8 +147,9 @@ Convert a number to words.
 **Parameters:**
 - `number` (int or float): The number to convert
 - `lang` (str): Language code. Options: `'en'`, `'ar'`, `'english'`, `'arabic'`. Default: `'en'`
-- `to` (str): Conversion type. Options: `'cardinal'`, `'ordinal'`. Default: `'cardinal'`
+- `to` (str): Conversion type. Options: `'cardinal'`, `'ordinal'`, `'currency'`. Default: `'cardinal'`
 - `**kwargs`: Additional language-specific parameters:
+  - `currency` (str): Currency code for currency conversion. Options: `'SAR'`, `'USD'`, `'EUR'`, `'EGP'`, `'KWD'`. Default: `'USD'` for English, `'SAR'` for Arabic
   - `gender` (str): For Arabic, use `'m'` (masculine) or `'f'` (feminine). Default: `'m'`
 
 **Returns:**
@@ -140,8 +161,18 @@ Convert a number to words.
 
 ## Supported Languages
 
-- **English** (`en`, `english`): Full support for cardinal and ordinal numbers
-- **Arabic** (`ar`, `arabic`): Full support with gender options (masculine/feminine)
+- **English** (`en`, `english`): Full support for cardinal, ordinal, and currency numbers
+- **Arabic** (`ar`, `arabic`): Full support with gender options (masculine/feminine) and currency
+
+## Supported Currencies
+
+- **SAR** (Saudi Riyal): 100 halalas per riyal
+- **USD** (US Dollar): 100 cents per dollar
+- **EUR** (Euro): 100 cents per euro
+- **EGP** (Egyptian Pound): 100 piastres per pound
+- **KWD** (Kuwaiti Dinar): 1000 fils per dinar
+
+All currencies are configurable via JSON files and can be easily extended.
 
 ## Performance
 

@@ -44,8 +44,9 @@ class BaseConverter(ABC):
         
         Args:
             number: Integer or float to convert
-            to: Conversion type ('cardinal', 'ordinal')
+            to: Conversion type ('cardinal', 'ordinal', 'currency')
             **kwargs: Additional language-specific parameters
+                - currency: Currency code (e.g., 'SAR', 'USD', 'EUR')
         
         Returns:
             str: Number in words
