@@ -4,7 +4,7 @@
   "ones_masculine": [
     "",
     "واحد",
-    "اثنان",
+    "إثنان",
     "ثلاثة",
     "أربعة",
     "خمسة",
@@ -14,7 +14,7 @@
     "تسعة",
     "عشرة",
     "أحد عشر",
-    "اثنا عشر",
+    "إثنا عشر",
     "ثلاثة عشر",
     "أربعة عشر",
     "خمسة عشر",
@@ -38,7 +38,7 @@
   "ones_feminine": [
     "",
     "واحدة",
-    "اثنتان",
+    "إثنتان",
     "ثلاث",
     "أربع",
     "خمس",
@@ -71,15 +71,15 @@
   ],
   "hundreds": [
     "",
-    "مئة",
-    "مئتان",
-    "ثلاث مئة",
-    "أربع مئة",
-    "خمس مئة",
-    "ست مئة",
-    "سبع مئة",
-    "ثمان مئة",
-    "تسع مئة"
+    "مائة",
+    "مائتان",
+    "ثلاثة مائة",
+    "أربعة مائة",
+    "خمسة مائة",
+    "ستة مائة",
+    "سبعة مائة",
+    "ثمانية مائة",
+    "تسعة مائة"
   ],
   "scales": [
     "",
@@ -104,7 +104,7 @@
   ],
   "zero": "صفر",
   "negative_prefix": "سالب",
-  "decimal_separator": "فاصلة",
+  "decimal_separator": "فاصل",
   "ordinal_prefix": "ال",
   "conjunction": "و",
   "number_separator": " ",
@@ -162,6 +162,17 @@
       "subunit_with_tanween": "فلساً",
       "subunit_plural": "فلوس",
       "subunit_factor": 1000,
+      "use_tanween_for_subunit": true,
+      "subunit_always_singular": false
+    },
+    "JOD": {
+      "name": "دينار",
+      "name_with_tanween": "ديناراً",
+      "plural": "دنانير",
+      "subunit": "قرش",
+      "subunit_with_tanween": "قرشاً",
+      "subunit_plural": "قروش",
+      "subunit_factor": 100,
       "use_tanween_for_subunit": true,
       "subunit_always_singular": false
     }

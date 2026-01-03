@@ -38,6 +38,7 @@ class Settings:
         'EUR': 'Euro',
         'EGP': 'Egyptian Pound',
         'KWD': 'Kuwaiti Dinar',
+        'JOD': 'Jordanian Dinar',
     }
     
     # Gender options (for Arabic)

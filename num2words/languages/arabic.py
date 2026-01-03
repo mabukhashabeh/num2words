@@ -105,7 +105,7 @@ class ArabicConverter(BaseConverter):
                 return tens[tens_digit]
             
             # Arabic uses "ones and tens" format
-            return f"{ones[ones_digit]} {self.conjunction}{tens[tens_digit]}"
+            return f"{ones[ones_digit]} {self.conjunction} {tens[tens_digit]}"
         
         if number < 1000:
             hundreds_digit = number // 100
@@ -114,7 +114,7 @@ class ArabicConverter(BaseConverter):
             if remainder == 0:
                 return self.hundreds[hundreds_digit]
             
-            return f"{self.hundreds[hundreds_digit]} {self.conjunction}{self._to_cardinal(remainder, gender)}"
+            return f"{self.hundreds[hundreds_digit]} {self.conjunction} {self._to_cardinal(remainder, gender)}"
         
         # Handle larger numbers
         scale_index = 0
@@ -142,7 +142,7 @@ class ArabicConverter(BaseConverter):
             
             scale_index += 1
         
-        return f' {self.conjunction}'.join(result_parts)
+        return f' {self.conjunction} '.join(result_parts)
     
     def _get_scale_word(self, number: int, scale_index: int) -> str:
         """Get the appropriate scale word based on number."""
@@ -163,9 +163,22 @@ class ArabicConverter(BaseConverter):
                 return self.scales_plural[scale_index]
             return self.scales[scale_index]
         else:
-            if scale_index < len(self.scales_plural):
-                return self.scales_plural[scale_index]
-            return self.scales[scale_index]
+            # For numbers > 10, check if it's a compound number (ends in 11-99)
+            # In Arabic, compound numbers often use singular scale word
+            remainder = number % 100
+            if 11 <= remainder <= 99:
+                # Compound number - use singular
+                return self.scales[scale_index]
+            elif remainder == 0:
+                # Round number - use plural
+                if scale_index < len(self.scales_plural):
+                    return self.scales_plural[scale_index]
+                return self.scales[scale_index]
+            else:
+                # Other cases - use plural
+                if scale_index < len(self.scales_plural):
+                    return self.scales_plural[scale_index]
+                return self.scales[scale_index]
     
     def _to_ordinal(self, number: int, gender: str = 'm') -> str:
         """Convert integer to ordinal Arabic words."""

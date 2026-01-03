@@ -88,12 +88,18 @@ print(num2words(100.50, to='currency', currency='EUR'))
 
 # Arabic
 print(num2words(323424.2, to='currency', currency='SAR', lang='ar'))
-# Output: "ثلاث مئة وثلاثة وعشرون آلاف وأربع مئة وأربعة وعشرون ريالات وعشرون هللة"
+# Output: "ثلاثة مائة و ثلاثة و عشرون ألف و أربعة مائة و أربعة و عشرون ريالات و عشرون هللة"
+
+print(num2words(50.25, to='currency', currency='SAR', lang='ar'))
+# Output: "خمسون ريال و خمسة و عشرون هللة"
+
+print(num2words(123.45, to='currency', currency='JOD', lang='ar'))
+# Output: "مائة و ثلاثة و عشرون دينار و خمسة و أربعون قرشاً"
 
 print(num2words(50.25, to='currency', currency='EGP', lang='ar'))
-# Output: "خمسون جنيهات وخمسة وعشرون قرشاً"
+# Output: "خمسون جنيه و خمسة و عشرون قرشاً"
 
-# Supported currencies: SAR, USD, EUR, EGP, KWD
+# Supported currencies: SAR, USD, EUR, EGP, KWD, JOD
 ```
 
 ## Usage with Web Frameworks
@@ -149,7 +155,7 @@ Convert a number to words.
 - `lang` (str): Language code. Options: `'en'`, `'ar'`, `'english'`, `'arabic'`. Default: `'en'`
 - `to` (str): Conversion type. Options: `'cardinal'`, `'ordinal'`, `'currency'`. Default: `'cardinal'`
 - `**kwargs`: Additional language-specific parameters:
-  - `currency` (str): Currency code for currency conversion. Options: `'SAR'`, `'USD'`, `'EUR'`, `'EGP'`, `'KWD'`. Default: `'USD'` for English, `'SAR'` for Arabic
+  - `currency` (str): Currency code for currency conversion. Options: `'SAR'`, `'USD'`, `'EUR'`, `'EGP'`, `'KWD'`, `'JOD'`. Default: `'USD'` for English, `'SAR'` for Arabic
   - `gender` (str): For Arabic, use `'m'` (masculine) or `'f'` (feminine). Default: `'m'`
 
 **Returns:**
@@ -171,6 +177,7 @@ Convert a number to words.
 - **EUR** (Euro): 100 cents per euro
 - **EGP** (Egyptian Pound): 100 piastres per pound
 - **KWD** (Kuwaiti Dinar): 1000 fils per dinar
+- **JOD** (Jordanian Dinar): 100 piastres per dinar
 
 All currencies are configurable via JSON files and can be easily extended.
 
