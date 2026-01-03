@@ -88,10 +88,10 @@ print(num2words(100.50, to='currency', currency='EUR'))
 
 # Arabic
 print(num2words(323424.2, to='currency', currency='SAR', lang='ar'))
-# Output: "ثلاث مئة وثلاثة وعشرون آلاف وأربع مئة وأربعة وعشرون ريالات وعشرون هللات"
+# Output: "ثلاث مئة وثلاثة وعشرون آلاف وأربع مئة وأربعة وعشرون ريالات وعشرون هللة"
 
 print(num2words(50.25, to='currency', currency='EGP', lang='ar'))
-# Output: "خمسون جنيهات وخمسة وعشرون قروش"
+# Output: "خمسون جنيهات وخمسة وعشرون قرشاً"
 
 # Supported currencies: SAR, USD, EUR, EGP, KWD
 ```
