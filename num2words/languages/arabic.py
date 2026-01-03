@@ -203,17 +203,54 @@ class ArabicConverter(BaseConverter):
             else:
                 main_words = self._to_cardinal(main_units, gender)
             
+            # Arabic grammar: numbers 3-10 use plural, but 100, 1000, etc. use singular
+            # Also, 1 always uses singular, 2 uses dual if available
             if main_units == 1:
                 currency_name = currency_info['name']
-            else:
+            elif main_units == 2:
+                # Use dual form if available, otherwise plural
+                currency_name = currency_info.get('dual', currency_info.get('plural', currency_info['name']))
+            elif main_units >= 3 and main_units <= 10:
+                # Numbers 3-10 use plural
                 currency_name = currency_info.get('plural', currency_info['name'])
-            parts.append(f"{main_words} {currency_name}")
+            elif main_units % 100 == 0 or main_units % 1000 == 0:
+                # Round hundreds and thousands use singular (مئة ريال، ألف ريال)
+                currency_name = currency_info['name']
+            else:
+                # Other numbers use plural
+                currency_name = currency_info.get('plural', currency_info['name'])
+            
+            # Arabic currency convention: for "one", put currency name first (ريال واحد)
+            # For other numbers, put number first (خمسة ريالات، مئة ريال)
+            if main_units == 1:
+                parts.append(f"{currency_name} {main_words}")
+            else:
+                parts.append(f"{main_words} {currency_name}")
         
         if subunits > 0:
             subunit_words = self._to_cardinal(subunits, gender)
+            # Use proper Arabic currency formatting based on real-world conventions
+            # SAR: خمسون هللة (singular form even with plural numbers)
+            # KWD/EGP/USD: عشرون فلساً، خمسة وعشرون قرشاً (tanween for all numbers)
+            use_tanween = currency_info.get('use_tanween_for_subunit', False)
+            subunit_always_singular = currency_info.get('subunit_always_singular', False)
+            
             if subunits == 1:
-                subunit_name = currency_info['subunit']
+                # Singular form
+                if use_tanween:
+                    subunit_name = currency_info.get('subunit_with_tanween', currency_info['subunit'])
+                else:
+                    subunit_name = currency_info['subunit']
+            elif subunit_always_singular:
+                # Some currencies (like SAR) use singular form even with plural numbers
+                # خمسون هللة (not هللات), عشرون هللة (not هللات)
+                subunit_name = currency_info.get('subunit_with_tanween', currency_info['subunit'])
+            elif use_tanween:
+                # For currencies that use tanween, apply it to all numbers (not just round tens)
+                # خمسة وعشرون قرشاً، خمسة وسبعون قرشاً
+                subunit_name = currency_info.get('subunit_with_tanween', currency_info['subunit'])
             else:
+                # Other numbers use plural form
                 subunit_name = currency_info.get('subunit_plural', currency_info['subunit'])
             parts.append(f"{subunit_words} {subunit_name}")
         

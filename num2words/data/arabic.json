@@ -112,38 +112,58 @@
   "currencies": {
     "SAR": {
       "name": "ريال",
+      "name_with_tanween": "ريالاً",
       "plural": "ريالات",
       "subunit": "هللة",
+      "subunit_with_tanween": "هللة",
       "subunit_plural": "هللات",
-      "subunit_factor": 100
+      "subunit_factor": 100,
+      "use_tanween_for_subunit": true,
+      "subunit_always_singular": true
     },
     "USD": {
       "name": "دولار",
+      "name_with_tanween": "دولاراً",
       "plural": "دولارات",
       "subunit": "سنت",
+      "subunit_with_tanween": "سنتاً",
       "subunit_plural": "سنتات",
-      "subunit_factor": 100
+      "subunit_factor": 100,
+      "use_tanween_for_subunit": true,
+      "subunit_always_singular": false
     },
     "EUR": {
       "name": "يورو",
+      "name_with_tanween": "يورو",
       "plural": "يورو",
       "subunit": "سنت",
+      "subunit_with_tanween": "سنتاً",
       "subunit_plural": "سنتات",
-      "subunit_factor": 100
+      "subunit_factor": 100,
+      "use_tanween_for_subunit": true,
+      "subunit_always_singular": false
     },
     "EGP": {
       "name": "جنيه",
+      "name_with_tanween": "جنيهاً",
       "plural": "جنيهات",
       "subunit": "قرش",
+      "subunit_with_tanween": "قرشاً",
       "subunit_plural": "قروش",
-      "subunit_factor": 100
+      "subunit_factor": 100,
+      "use_tanween_for_subunit": true,
+      "subunit_always_singular": false
     },
     "KWD": {
       "name": "دينار",
+      "name_with_tanween": "ديناراً",
       "plural": "دنانير",
       "subunit": "فلس",
+      "subunit_with_tanween": "فلساً",
       "subunit_plural": "فلوس",
-      "subunit_factor": 1000
+      "subunit_factor": 1000,
+      "use_tanween_for_subunit": true,
+      "subunit_always_singular": false
     }
   }
 }
