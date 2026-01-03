@@ -163,19 +163,24 @@ class ArabicConverter(BaseConverter):
                 return self.scales_plural[scale_index]
             return self.scales[scale_index]
         else:
-            # For numbers > 10, check if it's a compound number (ends in 11-99)
-            # In Arabic, compound numbers often use singular scale word
-            remainder = number % 100
-            if 11 <= remainder <= 99:
-                # Compound number - use singular
+            # For numbers > 10, check the last two digits
+            # In Arabic, numbers ending in 11-99 use singular scale word
+            last_two_digits = number % 100
+            if 11 <= last_two_digits <= 99:
+                # Ends in 11-99: use singular (ثلاثة وعشرون ألف)
                 return self.scales[scale_index]
-            elif remainder == 0:
-                # Round number - use plural
+            elif last_two_digits == 0:
+                # Round hundreds/thousands: use plural (ثلاث مائة آلاف)
+                if scale_index < len(self.scales_plural):
+                    return self.scales_plural[scale_index]
+                return self.scales[scale_index]
+            elif last_two_digits <= 10:
+                # Ends in 1-10: use plural (ثلاث مائة وثلاثة آلاف)
                 if scale_index < len(self.scales_plural):
                     return self.scales_plural[scale_index]
                 return self.scales[scale_index]
             else:
-                # Other cases - use plural
+                # Should not reach here, but default to plural
                 if scale_index < len(self.scales_plural):
                     return self.scales_plural[scale_index]
                 return self.scales[scale_index]
@@ -271,7 +276,7 @@ class ArabicConverter(BaseConverter):
             # Completely zero amount
             parts.append(f"{self.zero} {currency_info['name']}")
         
-        result = f' {self.conjunction}'.join(parts)
+        result = f' {self.conjunction} '.join(parts)
         
         if is_negative:
             result = f"{self.negative_prefix} {result}"
