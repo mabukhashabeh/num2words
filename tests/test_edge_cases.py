@@ -69,8 +69,8 @@ class TestEdgeCases(unittest.TestCase):
         self.assertEqual(num2words(0.001), "zero point zero zero one")
         
         # Arabic decimals
-        self.assertEqual(num2words(1.5, lang='ar'), "واحد فاصلة خمسة")
-        self.assertEqual(num2words(0.1, lang='ar'), "صفر فاصلة واحد")
+        self.assertEqual(num2words(1.5, lang='ar'), "واحد فاصل خمسة")
+        self.assertEqual(num2words(0.1, lang='ar'), "صفر فاصل واحد")
     
     def test_rounding_issues(self):
         """Test floating point rounding issues."""
@@ -111,15 +111,15 @@ class TestEdgeCases(unittest.TestCase):
         """Test Arabic gender edge cases."""
         # Masculine (default)
         self.assertEqual(num2words(1, lang='ar', gender='m'), "واحد")
-        self.assertEqual(num2words(2, lang='ar', gender='m'), "اثنان")
+        self.assertEqual(num2words(2, lang='ar', gender='m'), "إثنان")
         
         # Feminine
         self.assertEqual(num2words(1, lang='ar', gender='f'), "واحدة")
         self.assertEqual(num2words(2, lang='ar', gender='f'), "اثنتان")
         
         # Test with larger numbers
-        self.assertEqual(num2words(100, lang='ar', gender='m'), "مئة")
-        self.assertEqual(num2words(100, lang='ar', gender='f'), "مئة")
+        self.assertEqual(num2words(100, lang='ar', gender='m'), "مائة")
+        self.assertEqual(num2words(100, lang='ar', gender='f'), "مائة")
     
     def test_invalid_inputs(self):
         """Test invalid input handling."""
@@ -158,7 +158,7 @@ class TestEdgeCases(unittest.TestCase):
         """Test negative decimal numbers."""
         self.assertEqual(num2words(-1.5), "negative one point five")
         self.assertEqual(num2words(-0.5), "negative zero point five")
-        self.assertEqual(num2words(-1.5, lang='ar'), "سالب واحد فاصلة خمسة")
+        self.assertEqual(num2words(-1.5, lang='ar'), "سالب واحد فاصل خمسة")
     
     def test_ordinal_with_decimals(self):
         """Test ordinal with decimal (should use cardinal for decimal part)."""
