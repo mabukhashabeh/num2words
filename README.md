@@ -91,13 +91,13 @@ print(num2words(323424.2, to='currency', currency='SAR', lang='ar'))
 # Output: "ثلاثة مائة و ثلاثة و عشرون ألف و أربعة مائة و أربعة و عشرون ريالات و عشرون هللة"
 
 print(num2words(50.25, to='currency', currency='SAR', lang='ar'))
-# Output: "خمسون ريال و خمسة و عشرون هللة"
+# Output: "خمسون ريالات و خمسة و عشرون هللة"
 
 print(num2words(123.45, to='currency', currency='JOD', lang='ar'))
-# Output: "مائة و ثلاثة و عشرون دينار و خمسة و أربعون قرشاً"
+# Output: "مائة و ثلاثة و عشرون دنانير و خمسة و أربعون قرشاً"
 
 print(num2words(50.25, to='currency', currency='EGP', lang='ar'))
-# Output: "خمسون جنيه و خمسة و عشرون قرشاً"
+# Output: "خمسون جنيهات و خمسة و عشرون قرشاً"
 
 # Supported currencies: SAR, USD, EUR, EGP, KWD, JOD
 ```
